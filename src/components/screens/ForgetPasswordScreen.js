@@ -9,8 +9,6 @@ import {
      KeyboardAvoidingView,
      Keyboard,
      View,
-     Alert,
-     Animated
 } from "react-native";
 
 import {
@@ -19,6 +17,9 @@ import {
     Input,
     Icon
 } from 'native-base'
+
+// AWS Amplify
+import Auth from '@aws-amplify/auth'
 
 class ForgetPasswordScreen extends Component {
     state = {

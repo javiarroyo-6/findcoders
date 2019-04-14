@@ -9,6 +9,7 @@ import {
     KeyboardAvoidingView,
     Keyboard,
     View,
+    Alert
    
 } from "react-native";
 
@@ -19,12 +20,16 @@ import {
     Icon
 } from 'native-base'
 
+// AWS Amplify
+import Auth from '@aws-amplify/auth'
+
 class SignUpScreen extends Component {
 
     state = {
         username:'',
         password:'',
         email:'',
+        // users will receive a confirmation code
         authCode:''
     }
 
@@ -33,6 +38,73 @@ class SignUpScreen extends Component {
             [key]:value
         })
     }
+
+ // Sign up user with AWS Amplify Auth
+async signUp() {
+  const { username, password, email, } = this.state
+  // rename variable to conform with Amplify Auth field phone attribute
+  await Auth.signUp({
+    username,
+    password,
+    attributes: { email }
+  })
+  .then(() => {
+    console.log('sign up successful!')
+    Alert.alert('Enter the confirmation code you received.')
+  })
+  .catch(err => {
+    if (! err.message) {
+      console.log('Error when signing up: ', err)
+      Alert.alert('Error when signing up: ', err)
+    } else {
+      console.log('Error when signing up: ', err.message)
+      Alert.alert('Error when signing up: ', err.message)
+    }
+  })
+}
+    // Confirm users and redirect them to the SignIn page
+    async confirmSignUp() {
+      const {
+        username,
+        authCode
+      } = this.state
+      await Auth.confirmSignUp(username, authCode)
+        .then(() => {
+          this.props.navigation.navigate('SignIn')
+          console.log('Confirm sign up successful')
+        })
+        .catch(err => {
+          if (!err.message) {
+            console.log('Error when entering confirmation code: ', err)
+            Alert.alert('Error when entering confirmation code: ', err)
+          } else {
+            console.log('Error when entering confirmation code: ', err.message)
+            Alert.alert('Error when entering confirmation code: ', err.message)
+          }
+        })
+    }
+
+    // Resend code if not received already
+    async resendSignUp() {
+      const {
+        username
+      } = this.state
+      await Auth.resendSignUp(username)
+        .then(() => console.log('Confirmation code resent successfully'))
+        .catch(err => {
+          if (!err.message) {
+            console.log('Error requesting new confirmation code: ', err)
+            Alert.alert('Error requesting new confirmation code: ', err)
+          } else {
+            console.log('Error requesting new confirmation code: ', err.message)
+            Alert.alert('Error requesting new confirmation code: ', err.message)
+          }
+        })
+    }
+
+
+    
+
 
     render() {
         return (
@@ -80,8 +152,7 @@ class SignUpScreen extends Component {
                             autoCapitalize='none'
                             autoCorrect={false}
                             secureTextEntry={true}
-                            // ref={c => this.SecondInput = c}
-                            ref='SecondInput'
+                            // ref={ c => this.SecondInput = c}
                             onSubmitEditing={(event) => {this.refs.ThirdInput._root.focus()}}
                             onChangeText={value => this.onChangeText('password', value)}
                             />
@@ -102,12 +173,13 @@ class SignUpScreen extends Component {
                             autoCapitalize='none'
                             autoCorrect={false}
                             secureTextEntry={false}
-                            ref='ThirdInput'
+                            // ref='ThirdInput'
                             onSubmitEditing={(event) => {this.refs.FourthInput._root.focus()}}
                             onChangeText={value => this.onChangeText('email', value)}
                             />
                         </Item>
                         <TouchableOpacity
+                            onPress={() => this.signUp()}
                             style={styles.buttonStyle}>
                             <Text style={styles.buttonText}>
                             Sign Up
@@ -133,12 +205,14 @@ class SignUpScreen extends Component {
                             />
                         </Item>
                         <TouchableOpacity
+                            onPress={() => this.confirmSignUp()}
                             style={styles.buttonStyle}>
                             <Text style={styles.buttonText}>
                             Confirm Sign Up
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={() => this.resendSignUp()}
                             style={styles.buttonStyle}>
                             <Text style={styles.buttonText}>
                             Resend code
@@ -160,7 +234,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   input: {
     flex: 1,

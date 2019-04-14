@@ -5,22 +5,21 @@ import {
     StyleSheet
 } from "react-native";
 
-
-class ProfileScreen extends Component {
+class ImageContainer extends Component {
     render() {
         return (
             <View style={styles.container}>
-                
+                <Text>ImageContainer</Text>
             </View>
         );
     }
 }
-export default ProfileScreen;
+export default ImageContainer;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
-    },
+    }
 });

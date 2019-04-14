@@ -2,20 +2,32 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   View,
-  Text,
+ 
   ActivityIndicator,
-  AsyncStorage
+ 
 } from 'react-native'
+
+// AWS Amplify
+import Auth from '@aws-amplify/auth'
+
 export default class AuthLoadingScreen extends Component {
 
-    componentDidMount = async () => { //will call the loadapp method once the AuthLoadingScreen is mounted
-        await this.loadApp()
-    }
-    loadApp = async () => { // checks if the user has a userToken, if ? Application Screen : Authentication Screen
-        const userToken = await AsyncStorage.getItem('userToken')
-        this.props.navigation.navigate(userToken ? 'App' : 'Auth') // ternary operator if true "App" if not 'Auth'  
-    } // asyncstorage checks for the userToken
+      state = {
+      userToken: null
+      }
 
+      async componentDidMount () {
+        await this.loadApp()
+      }
+      // Get the logged in users and remember them
+      loadApp = async () => {
+        await Auth.currentAuthenticatedUser()
+        .then(user => {
+          this.setState({userToken: user.signInUserSession.accessToken.jwtToken})
+        })
+        .catch(err => console.log(err))
+        this.props.navigation.navigate(this.state.userToken ? 'App' : 'Auth')
+      }
 
   render() {
     return (

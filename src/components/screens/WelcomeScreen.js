@@ -4,8 +4,9 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Image
 } from 'react-native'
-import { Badge } from 'native-base';
+import { Button } from 'native-base';
 
 export default class WelcomeScreen extends React.Component {
   handleRoute = async (destination) => {
@@ -14,21 +15,40 @@ export default class WelcomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity 
-          onPress={() => this.props.navigation.navigate('SignUp')}
-          style={styles.buttonStyle}>
-          <Text style={styles.textStyle}>Sign up</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => this.props.navigation.navigate('SignIn')}
-          style={styles.buttonStyle}>
-          <Text style={styles.textStyle}>Sign in</Text>
-        </TouchableOpacity>
-        <TouchableOpacity 
-          onPress={() => this.props.navigation.navigate('ForgetPassword')}
-          style={styles.buttonStyle}>
-          <Text style={styles.textStyle}>Forget password ?</Text>
-        </TouchableOpacity>
+        <View style={{justifyContent:'center',alignItems:'center',}}>
+          <Text style={{fontSize:30, marginBottom:50}}> CodeBook</Text>
+        </View>
+
+        <View style={{justifyContent:'center', alignContent:'center', borderRadius:5, top:100 }}> 
+          <Button>
+            <TouchableOpacity 
+              onPress={() => this.props.navigation.navigate('SignUp')}
+              >
+              <Text style={styles.textStyle}>Sign up</Text>
+            </TouchableOpacity>
+          </Button>
+        </View>
+
+        <View style={{justifyContent:'center', alignContent:'center', borderRadius:5 , top:120}}>
+          <Button>
+            <TouchableOpacity 
+              onPress={() => this.props.navigation.navigate('SignIn')}
+              >
+              <Text style={styles.textStyle}>Sign in</Text>
+            </TouchableOpacity>
+          </Button>
+        </View>
+      
+      <View style={{justifyContent:'center', alignContent:'center', borderRadius:5, top:140}}>
+        <Button >
+          <TouchableOpacity 
+            onPress={() => this.props.navigation.navigate('ForgetPassword')}
+            >
+            <Text style={styles.textStyle}>Forget password ?</Text>
+          </TouchableOpacity>
+        </Button>
+      </View>
+
       </View>
     )
   }
@@ -37,12 +57,13 @@ export default class WelcomeScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor: '#A9A9A9',
+    
   },
   buttonStyle: {
-    padding: 20,
+    
   },
   textStyle: {
     fontSize: 18,

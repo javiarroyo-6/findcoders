@@ -1,0 +1,19 @@
+{
+    "master": {
+        "awscloudformation": {
+            "AuthRoleName": "findcoders-20190413192256-authRole",
+            "UnauthRoleArn": "arn:aws:iam::613454605641:role/findcoders-20190413192256-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::613454605641:role/findcoders-20190413192256-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "findcoders-20190413192256-deployment",
+            "UnauthRoleName": "findcoders-20190413192256-unauthRole",
+            "StackName": "findcoders-20190413192256",
+            "StackId": "arn:aws:cloudformation:us-west-2:613454605641:stack/findcoders-20190413192256/3775f3f0-5e5c-11e9-8bc2-06825eacfe56"
+        },
+        "categories": {
+            "auth": {
+                "cognito45fac568": {}
+            }
+        }
+    }
+}

@@ -2,15 +2,10 @@ import React, { Component } from "react";
 import {
   AsyncStorage,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   StyleSheet,
   Text,
   SafeAreaView,
-  StatusBar,
-  KeyboardAvoidingView,
-  Keyboard,
   View,
-  Alert
 } from 'react-native'
 
 import {
@@ -19,6 +14,11 @@ import {
   Input,
   Icon,
 } from 'native-base'
+
+// AWS Amplify
+import Auth from '@aws-amplify/auth'
+
+import ImageContainer from '../ui-components/ImageContainer'
 
 export default class SettingsScreen extends Component {
 
@@ -32,20 +32,50 @@ export default class SettingsScreen extends Component {
        })
      }
   
-    async signOut() { // clears the usersTokens which in turn will redirect the user to AuthLoading Screen
-        await AsyncStorage.clear()
-        this.props.navigation.navigate('Authloading')
-    }
+   signOutAlert = async () => {
+     await Alert.alert(
+       'Sign Out',
+       'Are you sure you want to sign out from the app?',
+       [{
+           text: 'Cancel',
+           onPress: () => console.log('Canceled'),
+           style: 'cancel'
+         },
+         // Calling signOut
+         {
+           text: 'OK',
+           onPress: () => this.signOut()
+         },
+       ], {
+         cancelable: false
+       }
+     )
+   }
+   
+   // Confirm sign out
+   signOut = async () => {
+     await Auth.signOut()
+       .then(() => {
+         console.log('Sign out complete')
+         this.props.navigation.navigate('AuthLoading')
+       })
+       .catch(err => console.log('Error while signing out!', err))
+   }
 
     render() {
     return (
-      <View style={styles.container}>
-       <TouchableOpacity
-          onPress={() => this.signOut()}
-          style={styles.buttonStyle}>
-          <Text style={styles.textStyle}>Sign out</Text>
-        </TouchableOpacity>
-      </View>
+     
+        <View style={styles.container}>
+          <ImageContainer 
+              style={{marginTop:20}}
+            />
+          <TouchableOpacity
+              onPress={() => this.signOut()}
+              style={styles.buttonStyle}>
+              <Text style={styles.textStyle}>Sign out</Text>
+            </TouchableOpacity>
+        </View>
+     
     )
   }
 }
@@ -85,7 +115,7 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     alignItems: 'center',
-    backgroundColor: '#667292',
+    backgroundColor: 'red',
     padding: 14,
     marginBottom: 20,
     borderRadius: 24,

@@ -21,6 +21,9 @@ import {
     Icon
 } from 'native-base'
 
+// AWS Amplify
+import Auth from '@aws-amplify/auth'
+
 
 
 class SignInScreen extends Component {
@@ -36,13 +39,24 @@ class SignInScreen extends Component {
   
    
    async signIn() { // setting up the key-value of the user
-        console.log('signIn')
-        await AsyncStorage.setItem('userToken', '123456789')
-        this.props.navigation.navigate('AuthLoading') 
+    const { username, password } = this.state
+        await Auth.signIn(username, password)
+        .then(user => {
+            this.setState({ user })
+            this.props.navigation.navigate('AuthLoading')
+        })
+        .catch(err => {
+            if (! err.message) {
+            console.log('Error when signing in: ', err)
+            Alert.alert('Error when signing in: ', err)
+            } else {
+            console.log('Error when signing in: ', err.message)
+            Alert.alert('Error when signing in: ', err.message)
+            }
+        })
     } 
-
-
-    
+     
+ 
 
     render() {
         return (
@@ -113,13 +127,14 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         justifyContent: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+
     },
     input: {
         flex: 1,
         fontSize: 17,
         fontWeight: 'bold',
-        color: '#fff',
+        color: 'black',
     },
     infoContainer: {
         position: 'absolute',
