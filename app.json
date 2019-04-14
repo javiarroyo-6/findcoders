@@ -4,6 +4,7 @@
     "slug": "findcoders",
     "privacy": "public",
     "sdkVersion": "32.0.0",
+    "facebookScheme": "fb404906886726349",
     "platforms": [
       "ios",
       "android"

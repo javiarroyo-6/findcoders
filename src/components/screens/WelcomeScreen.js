@@ -4,7 +4,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image
+  Image,
+  Linking
 } from 'react-native'
 import { Button } from 'native-base';
 
@@ -12,6 +13,33 @@ export default class WelcomeScreen extends React.Component {
   handleRoute = async (destination) => {
     await this.props.navigation.navigate(destination)
   }
+
+    // async logInFB() {
+    //   try {
+    //     const {
+    //       type,
+    //       token,
+    //       expires,
+    //       permissions,
+    //       declinedPermissions,
+    //     } = await Facebook.logInWithReadPermissionsAsync('404906886726349', {
+    //       permissions: ['public_profile'],
+    //     });
+    //     if (type === 'success') {
+    //       // Get the user's name using Facebook's Graph API
+    //       const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+    //       Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+    //     } else {
+    //       // type === 'cancel'
+    //     }
+    //   } catch ({ message }) {
+    //     alert(`Facebook Login Error: ${message}`);
+    //   }
+    // }
+
+
+
+
   render() {
     return (
       <View style={styles.container}>
@@ -49,6 +77,15 @@ export default class WelcomeScreen extends React.Component {
         </Button>
       </View>
 
+      <View style={{ justifyContent:'center', alignContent:'center', top:160, borderRadius:5}}>
+        <Button>
+            <Text 
+             style={styles.textStyle}
+             onPress = {() => Linking.openURL('https://developers.facebook.com/developercircles/lead/apply/')} 
+              > Connect With Facebook
+            </Text>
+        </Button>
+      </View>
       </View>
     )
   }

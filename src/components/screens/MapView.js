@@ -14,8 +14,10 @@ class ViewMap extends Component {
         this.state = {
             latitude:0,
             longitude:0,
-            error: null
+            error: null,
+            // markers:[]
         }
+        // this.handlePress = this.handlePress.bind(this)
     }
 
     componentDidMount(){
@@ -31,6 +33,18 @@ class ViewMap extends Component {
         )
     }
 
+    // handlePress(e){
+    //     this.setState({
+    //         markers: [
+    //             ...this.state.markers,
+    //             {
+    //                 coordinate: e.nativeEvent.coordinate,
+    //                 cost: `$${getRandomInt(50,300)}`
+    //             }
+    //         ]
+    //     })
+    // }
+
     render(){
         return(
             <View style={styles.container}>
@@ -41,9 +55,15 @@ class ViewMap extends Component {
                     longitude: this.state.longitude,
                     latitudeDelta: 0.015,
                     longitudeDelta: 0.0121,
-                }}>
+                }}
+                onPress={this.handlePress}
+                >
+                {/* {this.state.markers.map((marker) => {
+                    return <Marker {...marker} />
+                })} */}
                 <Marker 
                     coordinate={this.state}
+                    pinColor="blue"
                 />
                 </MapView>
             </View>
