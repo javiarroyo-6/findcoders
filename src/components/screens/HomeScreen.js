@@ -4,20 +4,18 @@ import {
     Text,
     StyleSheet
 } from "react-native";
-import MapView from 'react-native-maps'
+import ViewMap from './MapView.js';
+import Searchbar from '../ui-components/Searchbar.js';
+
 
 class HomeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                 <MapView
-                    initialRegion={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                    }}
-                />
+                <View>
+                    <Searchbar />
+                </View>
+                <ViewMap />
             </View>
         );
     }
@@ -31,3 +29,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     }
 });
+

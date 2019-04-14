@@ -111,7 +111,7 @@ export default SignInScreen;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#aa73b7',
+        backgroundColor: '#fff',
         justifyContent: 'center',
         flexDirection: 'column'
     },
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 17,
         fontWeight: 'bold',
-        color: '#5a52a5',
+        color: '#fff',
     },
     infoContainer: {
         position: 'absolute',
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingHorizontal: 30, 
-        backgroundColor: '#aa73b7',
+        backgroundColor: '#fff',
     },
     itemStyle: {
         marginBottom: 20,
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         alignItems: 'center',
-        backgroundColor: '#667292',
+        backgroundColor: 'black',
         padding: 14,
         marginBottom: 20,
         borderRadius: 24,

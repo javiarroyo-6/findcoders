@@ -85,6 +85,15 @@ const options = {
 // Bottom App tabs
 const AppTabNavigator = createMaterialTopTabNavigator(configurations, options)
 
+// Making the common header title dynamic in AppTabNavigator
+AppTabNavigator.navigationOptions = ({ navigation }) => {
+  let { routeName } =   navigation.state.routes[navigation.state.index]
+  let headerTitle = routeName
+  return {
+    headerTitle,
+  }
+}
+
 
 const AppStackNavigator = createStackNavigator({ // allowing the drawer to open and close when pressed
   Header: {
@@ -117,7 +126,7 @@ const AuthStackNavigator = createStackNavigator({
       Welcome: {
         screen: WelcomeScreen,
         navigationOptions: () => ({
-          title: `Welcome!`, // for the header screen
+          title: `Welcome to CodeBook!`, // for the header screen
           headerBackTitle: 'Back'
         }),
       },

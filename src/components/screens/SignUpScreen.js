@@ -9,10 +9,7 @@ import {
     KeyboardAvoidingView,
     Keyboard,
     View,
-    Alert,
-    Modal,
-    FlatList,
-    Animated,
+   
 } from "react-native";
 
 import {
@@ -28,7 +25,6 @@ class SignUpScreen extends Component {
         username:'',
         password:'',
         email:'',
-        phoneNumber:'',
         authCode:''
     }
 
@@ -111,28 +107,6 @@ class SignUpScreen extends Component {
                             onChangeText={value => this.onChangeText('email', value)}
                             />
                         </Item>
-                        {/* phone section  */}
-                        <Item rounded style={styles.itemStyle}>
-                            <Icon
-                            active
-                            name='call'
-                            style={styles.iconStyle}
-                            />
-                            <Input
-                            style={styles.input}
-                            placeholder='+44766554433'
-                            placeholderTextColor='#adb4bc'
-                            keyboardType={'phone-pad'}
-                            returnKeyType='done'
-                            autoCapitalize='none'
-                            autoCorrect={false}
-                            secureTextEntry={false}
-                            ref='FourthInput'
-                            value={this.state.phoneNumber}
-                            onChangeText={(val) => this.onChangeText('phoneNumber', val)}
-                            />
-                        </Item>
-                        {/* End of phone input */}
                         <TouchableOpacity
                             style={styles.buttonStyle}>
                             <Text style={styles.buttonText}>
@@ -184,7 +158,7 @@ export default SignUpScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#aa73b7',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     flexDirection: 'column'
   },
@@ -204,7 +178,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 30,
-    backgroundColor: '#aa73b7',
+    backgroundColor: '#fff',
   },
   itemStyle: {
     marginBottom: 10,
