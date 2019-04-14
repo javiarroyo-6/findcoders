@@ -4,13 +4,14 @@ import {
     Text,
     StyleSheet
 } from "react-native";
+import SkillSet from '../ui-components/SkillSet'
 
 
 class ProfileScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                
+                <SkillSet />
             </View>
         );
     }
