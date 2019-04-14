@@ -4,10 +4,10 @@ import {
   StyleSheet,
   Alert,
   Text,
-  ScrollView
+  Button
 } from 'react-native';
 
-import { Button } from 'native-base'
+
 
 import { TagSelect } from 'react-native-tag-select';
 
@@ -47,7 +47,6 @@ export default class App extends Component {
 
 
     return (
-    <ScrollView>
         <View style={styles.container}>
             <Text style={styles.labelText}>Choose your skills: </Text>
             <TagSelect
@@ -67,9 +66,8 @@ export default class App extends Component {
             <View style={styles.buttonContainer}>
             <View style={styles.buttonInner}>
                 <Button
-                rounded
                 title="Get selected count"
-                style={styles.button}
+                style={{color:'white'}}
                 onPress={() => {
                     Alert.alert('Selected count', `Total: ${this.tag.totalSelected}`);
                 }}
@@ -77,7 +75,7 @@ export default class App extends Component {
             </View>
             <View>
                 <Button
-                rounded
+                style={{color:'white'}}
                 title="Get selected"
                 onPress={() => {
                     Alert.alert('Selected items:', JSON.stringify(this.tag.itemsSelected));
@@ -88,7 +86,6 @@ export default class App extends Component {
             <View>
             </View>
         </View>
-    </ScrollView>
     );
   }
 }
@@ -96,7 +93,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
+    backgroundColor: 'grey',
     marginTop: 50,
     marginLeft: 15,
   },
@@ -107,7 +104,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   labelText: {
-    color: '#333',
+    color: '#fff',
     fontSize: 15,
     fontWeight: '500',
     marginBottom: 15,

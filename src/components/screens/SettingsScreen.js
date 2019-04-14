@@ -4,8 +4,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   Text,
-  SafeAreaView,
   View,
+  ScrollView,
+
 } from 'react-native'
 
 import {
@@ -15,10 +16,12 @@ import {
   Icon,
 } from 'native-base'
 
+import CardImage from '../ui-components/CardImage.js';
+import CardList from '../ui-components/CardList.js';
+import DeveloperCircle from '../ui-components/DeveloperCircle'
+
 // AWS Amplify
 import Auth from '@aws-amplify/auth'
-
-import ImageContainer from '../ui-components/ImageContainer'
 
 export default class SettingsScreen extends Component {
 
@@ -64,17 +67,29 @@ export default class SettingsScreen extends Component {
 
     render() {
     return (
-     
+     <ScrollView>
         <View style={styles.container}>
-          <ImageContainer 
-              style={{marginTop:20}}
-            />
-          <TouchableOpacity
-              onPress={() => this.signOut()}
-              style={styles.buttonStyle}>
-              <Text style={styles.textStyle}>Sign out</Text>
-            </TouchableOpacity>
+          <View style={styles.card}>
+            <CardImage />
+          </View>
+           <View style={{top:250,marginLeft:90}}>
+            <Text> University of Southern California </Text>
+          </View>
+          <View style={{top:300,height:300}}>
+            <CardList />
+          </View>
+          <View style={{top: 50, height:200 }}>
+            <DeveloperCircle />
+          </View>
+          <View style={{top:40}}>
+            <TouchableOpacity
+                onPress={() => this.signOut()}
+                style={styles.buttonStyle}>
+                <Text style={styles.textStyle}>Sign out</Text>
+              </TouchableOpacity>
+          </View>
         </View>
+      </ScrollView>
      
     )
   }
@@ -82,10 +97,15 @@ export default class SettingsScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    flexDirection: 'column'
+    flex:1
+
+  },
+  card:{
+    position: 'absolute',
+    width: 361 ,
+    height: 230 ,
+    left: 7 ,
+    top: 14, 
   },
   input: {
     flex: 1,
