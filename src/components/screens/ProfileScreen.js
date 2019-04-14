@@ -5,11 +5,13 @@ import {
     StyleSheet
 } from "react-native";
 
+import Profile from './src/components/screens/Profile'
+
 class ProfileScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>ProfileScreen</Text>
+                Profile
             </View>
         );
     }
