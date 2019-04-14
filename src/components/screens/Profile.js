@@ -5,7 +5,7 @@ import { Avatar, Rating, AirbnbRating } from 'react-native-elements'
 
 
 
-export default class App extends React.Component {
+export default class Profile extends React.Component {
 
   render() {
     return (
